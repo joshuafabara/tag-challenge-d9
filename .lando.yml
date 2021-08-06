@@ -2,3 +2,9 @@ name: tag-challenge-d9
 recipe: drupal9
 config:
   webroot: .
+tooling:
+  drupal:
+    service: appserver
+    description: Runs Drupal console
+    cmd: /app/vendor/bin/drupal
+    user: www-data

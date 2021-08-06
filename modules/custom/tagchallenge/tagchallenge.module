@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Contains tagchallenge.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tagchallenge_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tagchallenge module.
+    case 'help.page.tagchallenge':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tag Challenge') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tagchallenge_theme() {
+  return [
+    'tagchallenge' => [
+      'variables' => [
+        'topics' => array()
+      ],
+    ],
+  ];
+}

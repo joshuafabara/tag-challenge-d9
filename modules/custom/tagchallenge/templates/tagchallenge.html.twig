@@ -1,0 +1,13 @@
+<!-- Add you custom twig html here -->
+<section class="tag-challenge">
+  <h2>Class Schedule</h2>
+  <div class="tag-challenge--container">
+    <div class="tag-challenge--inner-container">
+      {% if topics %}
+        {% for topic in topics %}
+          <div>{{ topic.name }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>

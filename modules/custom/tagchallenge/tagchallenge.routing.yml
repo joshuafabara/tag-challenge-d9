@@ -1,0 +1,7 @@
+tagchallenge.tagchallenge_controller_render:
+  path: '/tagchallenge'
+  defaults:
+    _controller: '\Drupal\tagchallenge\Controller\TagchallengeController::tagchallengeRender'
+    _title: 'Tag Challenge'
+  requirements:
+    _permission: 'access content'

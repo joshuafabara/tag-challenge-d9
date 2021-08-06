@@ -1,0 +1,13 @@
+{
+    "name": "tagchallenge",
+    "type": "drupal-module",
+    "description": "Tag Challenge",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/tagchallenge",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/tagchallenge",
+        "source": "http://cgit.drupalcode.org/tagchallenge",
+    },
+}

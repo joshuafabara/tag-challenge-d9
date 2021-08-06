@@ -1,0 +1,6 @@
+name: 'tagchallenge'
+type: module
+description: 'Tag Challenge'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Custom'

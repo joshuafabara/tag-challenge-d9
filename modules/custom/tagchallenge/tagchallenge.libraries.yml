@@ -1,0 +1,8 @@
+tagchallenge:
+  version: VERSION
+  js:
+    js/tagchallenge.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.form

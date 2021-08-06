@@ -3,12 +3,7 @@
   <h2>Student Schedule Registration</h2>
   <div class="tag-challenge--container">
     <div class="tag-challenge--inner-container">
-      {% if topics %}
-        {% for topic in topics %}
-          <div>{{ topic.name }}</div>
-        {% endfor %}
-      {% endif %}
-      <div>
+      <div class="tag-challenge--form-container">
         <form>
           <div class="js-form-item form-item">
             <label for="username" class="form-label">Username*</label>
@@ -19,9 +14,33 @@
             <input class="form-input form-email" type="email" id="email" name="email" value="" required>
           </div>
           <div class="js-form-item form-item">
+            <label for="subject" class="form-label">Subject*</label>
+            <select class="form-input form-subject" id="subject" name="subject" required>
+              <option value="">Select Subject</option>
+              <option value="math">Math</option>
+              <option value="science">Science</option>
+              <option value="arts">Arts</option>
+              <option value="language_arts">Language Arts</option>
+            </select>
+          </div>
+          <div class="js-form-item form-item">
+            <label for="topic" class="form-label">Topic*</label>
+            <select class="form-input form-topic" id="topic" name="topic" required>
+            </select>
+          </div>
+          <div class="js-form-item form-item">
+            <label for="timeslot" class="form-label">Class Timeslot*</label>
+            <select class="form-input form-timeslot" id="timeslot" name="timeslot" required>
+            </select>
+          </div>
+          <div class="js-form-item form-item">
             <input type="submit" id="tag-challenge--submit" value="Submit">
           </div>
         </form>
+      </div>
+      <div class="tag-challenge--schedule-container">
+        <div class="tag-challenge--schedule" id="tag-challenge--schedule">
+        </div>
       </div>
     </div>
   </div>

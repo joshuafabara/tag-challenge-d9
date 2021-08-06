@@ -15,11 +15,12 @@ class TagChallengeController extends ControllerBase {
    * Hello.
    *
    * @return string
-   *   Return Hello string.
+   *   Return Tag Challenge page theme
    */
   public function tagchallengeRender() {
+    // Hardcoded array for data emulating backend array.
     $topics = array(
-      0 => array(
+      'algebra' => array(
         'name' => 'Algebra',
         'value' => 'algebra',
         'subject' => 'Math',
@@ -34,7 +35,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      1 => array(
+      'trigonometry' => array(
         'name' => 'Trigonometry',
         'value' => 'trigonometry',
         'subject' => 'Math',
@@ -49,7 +50,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      2 => array(
+      'calculus' => array(
         'name' => 'Calculus',
         'value' => 'calculus',
         'subject' => 'Math',
@@ -64,7 +65,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      3 => array(
+      'physics' => array(
         'name' => 'Physics',
         'value' => 'physics',
         'subject' => 'Science',
@@ -79,7 +80,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      4 => array(
+      'chemistry' => array(
         'name' => 'Chemistry',
         'value' => 'chemistry',
         'subject' => 'Science',
@@ -94,7 +95,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      5 => array(
+      'biology' => array(
         'name' => 'Biology',
         'value' => 'biology',
         'subject' => 'Science',
@@ -109,9 +110,9 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      6 => array(
+      'art_history' => array(
         'name' => 'Art History',
-        'value' => 'art-history',
+        'value' => 'art_history',
         'subject' => 'Art',
         'times' => array(
           0 => array(
@@ -120,7 +121,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      7 => array(
+      'painting' => array(
         'name' => 'Painting',
         'value' => 'painting',
         'subject' => 'Art',
@@ -131,7 +132,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      8 => array(
+      'drawing' => array(
         'name' => 'Drawing',
         'value' => 'drawing',
         'subject' => 'Art',
@@ -146,7 +147,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      9 => array(
+      'literature' => array(
         'name' => 'Literature',
         'value' => 'literature',
         'subject' => 'Language Arts',
@@ -161,7 +162,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      10 => array(
+      'grammar' => array(
         'name' => 'Grammar',
         'value' => 'grammar',
         'subject' => 'Language Arts',
@@ -188,7 +189,7 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-      11 => array(
+      'writing' => array(
         'name' => 'Writing',
         'value' => 'writing',
         'subject' => 'Language Arts',
@@ -203,7 +204,85 @@ class TagChallengeController extends ControllerBase {
           )
         )
       ),
-    );    
+    );
+    
+    $settings = array(
+      'subjects' => array(
+        'math' => array(
+          'name' => 'Math',
+          'value' => 'math',
+          'topics' => array(
+            0 => array(
+              'name' => 'Algebra',
+              'value' => 'algebra'
+            ),
+            1 => array(
+              'name' => 'Trigonometry',
+              'value' => 'trigonometry'
+            ),
+            2 => array(
+              'name' => 'Calculus',
+              'value' => 'calculus'
+            )
+          )
+        ),
+        'science' => array(
+          'name' => 'Science',
+          'value' => 'science',
+          'topics' => array(
+            0 => array(
+              'name' => 'Physics',
+              'value' => 'physics'
+            ),
+            1 => array(
+              'name' => 'Chemistry',
+              'value' => 'chemistry'
+            ),
+            2 => array(
+              'name' => 'Biology',
+              'value' => 'biology'
+            )
+          )
+        ),
+        'arts' => array(
+          'name' => 'Arts',
+          'value' => 'arts',
+          'topics' => array(
+            0 => array(
+              'name' => 'Art History',
+              'value' => 'art_history'
+            ),
+            1 => array(
+              'name' => 'Painting',
+              'value' => 'painting'
+            ),
+            2 => array(
+              'name' => 'Drawing',
+              'value' => 'drawing'
+            )
+          )
+        ),
+        'language_arts' => array(
+          'name' => 'Language Arts',
+          'value' => 'language_arts',
+          'topics' => array(
+            0 => array(
+              'name' => 'Literature',
+              'value' => 'literature'
+            ),
+            1 => array(
+              'name' => 'Grammar',
+              'value' => 'grammar'
+            ),
+            2 => array(
+              'name' => 'Writing',
+              'value' => 'writing'
+            )
+          )
+        ),
+      ),
+      'topics' => $topics
+    );
     
     return [
       '#theme' => 'tagchallenge',
@@ -212,6 +291,7 @@ class TagChallengeController extends ControllerBase {
         'library' => [
           'tagchallenge/tagchallenge',
         ],
+        'drupalSettings' => $settings
       ],
     ];
   }
@@ -226,28 +306,22 @@ class TagChallengeController extends ControllerBase {
    *   The Json response.
    */
   public function register(Request $request) {
-    $username = $request->query->get('username');
-    // $guestData = $request->query->get('guest_data');
-    // if (empty($eventId)) {
-    //   return $this->errorResponse();
-    // }
+    $username = $request->get('username');
+    $email = $request->get('email');
+    $subject = $request->get('subject');
+    $topic = $request->get('topic');
+    $weight = $request->get('weight');
+    $timeslot = $request->get('timeslot');
+    $subjectProcessed = ucwords(str_replace("_", " ", $subject));
+    $topicProcessed = ucwords(str_replace("_", " ", $topic));
+
     return new JsonResponse([
-      'status' => 'registered'
+      'status' => 'registered',
+      'username' => $username,
+      'email' => $email,
+      'subject' => array('value' => $subject, 'name' => $subjectProcessed),
+      'topic' => array('value' => $topic, 'name' => $topicProcessed),
+      'timeslot' => array('value' => $weight, 'name' => $timeslot),
     ]);
-    // if ($this->singleSessionRegistration && $result = $this->singleSessionRegistration->register($eventId, $guestData)) {
-    //   $eventStatus = !empty($result->EventRegistrationStatus) ? strtolower($result->EventRegistrationStatus) : '';
-    //   $eventNode = Node::load($eventId);
-    //   $cmsEvent = new CmsEvent($eventNode);
-    //   $confirmationModal = new MspConfirmationModal($cmsEvent, $eventStatus, $guestData ? TRUE : FALSE, $this->isEventListingPage($request));
-    //   return new JsonResponse([
-    //     'status' => $eventStatus,
-    //     'components' => [
-    //       'confirmation_modal' => $confirmationModal->render(),
-    //     ],
-    //   ]);
-    // }
-    // else {
-    //   return $this->errorResponse();
-    // }
   }
 }

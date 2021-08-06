@@ -3,6 +3,8 @@
 namespace Drupal\tagchallenge\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class TagChallengeController.
@@ -202,168 +204,6 @@ class TagChallengeController extends ControllerBase {
         )
       ),
     );    
-    // $topics = array(
-    //   'Algebra' => array(
-    //     'subject' => 'Math',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 8,
-    //         'time' => '8:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 11,
-    //         'time' => '11:00 AM'
-    //       )
-    //     )
-    //   ),
-    //   'Trigonometry' => array(
-    //     'subject' => 'Math',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 9,
-    //         'time' => '9:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 12,
-    //         'time' => '12:00 PM'
-    //       )
-    //     )
-    //   ),
-    //   'Calculus' => array(
-    //     'subject' => 'Math',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 10,
-    //         'time' => '10:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 15,
-    //         'time' => '3:00 PM'
-    //       )
-    //     )
-    //   ),
-    //   'Physics' => array(
-    //     'subject' => 'Science',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 10,
-    //         'time' => '10:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 15,
-    //         'time' => '3:00 PM'
-    //       )
-    //     )
-    //   ),
-    //   'Chemistry' => array(
-    //     'subject' => 'Science',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 9,
-    //         'time' => '9:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 13,
-    //         'time' => '1:00 PM'
-    //       )
-    //     )
-    //   ),
-    //   'Biology' => array(
-    //     'subject' => 'Science',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 8,
-    //         'time' => '8:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 10,
-    //         'time' => '10:00 AM'
-    //       )
-    //     )
-    //   ),
-    //   'Art History' => array(
-    //     'subject' => 'Art',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 11,
-    //         'time' => '11:00 AM'
-    //       )
-    //     )
-    //   ),
-    //   'Painting' => array(
-    //     'subject' => 'Art',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 14,
-    //         'time' => '2:00 PM'
-    //       )
-    //     )
-    //   ),
-    //   'Drawing' => array(
-    //     'subject' => 'Art',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 8,
-    //         'time' => '8:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 5,
-    //         'time' => '5:00 AM'
-    //       )
-    //     )
-    //   ),
-    //   'Literature' => array(
-    //     'subject' => 'Language Arts',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 8.5,
-    //         'time' => '8:30 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 11.75,
-    //         'time' => '11:45 AM'
-    //       )
-    //     )
-    //   ),
-    //   'Grammar' => array(
-    //     'subject' => 'Language Arts',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 8,
-    //         'time' => '8:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 9,
-    //         'time' => '9:00 AM'
-    //       ),
-    //       2 => array(
-    //         'weight' => 10,
-    //         'time' => '10:00 AM'
-    //       ),
-    //       3 => array(
-    //         'weight' => 11,
-    //         'time' => '11:00 AM'
-    //       ),
-    //       4 => array(
-    //         'weight' => 13,
-    //         'time' => '1:00 PM'
-    //       )
-    //     )
-    //   ),
-    //   'Writing' => array(
-    //     'subject' => 'Language Arts',
-    //     'times' => array(
-    //       0 => array(
-    //         'weight' => 8,
-    //         'time' => '8:00 AM'
-    //       ),
-    //       1 => array(
-    //         'weight' => 11,
-    //         'time' => '11:00 AM'
-    //       )
-    //     )
-    //   ),
-    // );
     
     return [
       '#theme' => 'tagchallenge',
@@ -376,4 +216,38 @@ class TagChallengeController extends ControllerBase {
     ];
   }
 
+  /**
+   * Registers the student.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Request object.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The Json response.
+   */
+  public function register(Request $request) {
+    $username = $request->query->get('username');
+    // $guestData = $request->query->get('guest_data');
+    // if (empty($eventId)) {
+    //   return $this->errorResponse();
+    // }
+    return new JsonResponse([
+      'status' => 'registered'
+    ]);
+    // if ($this->singleSessionRegistration && $result = $this->singleSessionRegistration->register($eventId, $guestData)) {
+    //   $eventStatus = !empty($result->EventRegistrationStatus) ? strtolower($result->EventRegistrationStatus) : '';
+    //   $eventNode = Node::load($eventId);
+    //   $cmsEvent = new CmsEvent($eventNode);
+    //   $confirmationModal = new MspConfirmationModal($cmsEvent, $eventStatus, $guestData ? TRUE : FALSE, $this->isEventListingPage($request));
+    //   return new JsonResponse([
+    //     'status' => $eventStatus,
+    //     'components' => [
+    //       'confirmation_modal' => $confirmationModal->render(),
+    //     ],
+    //   ]);
+    // }
+    // else {
+    //   return $this->errorResponse();
+    // }
+  }
 }

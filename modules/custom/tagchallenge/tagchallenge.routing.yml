@@ -5,3 +5,11 @@ tagchallenge.tagchallenge_controller_render:
     _title: 'Tag Challenge'
   requirements:
     _permission: 'access content'
+
+tag_challenge.ajax_registration:
+  path: '/student/ajax/register'
+  defaults:
+    _controller: '\Drupal\tagchallenge\Controller\TagchallengeController::register'
+    _title: 'Student Registration'
+  requirements:
+    _permission: 'access content'

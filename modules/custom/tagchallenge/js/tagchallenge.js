@@ -8,6 +8,29 @@
   Drupal.behaviors.tagChallenge = {
     attach: function attach(context) {
       console.log('it is working');
+      // Variables
+      let TAG = {};
+      TAG.Challenge = TAG.Challenge || {};
+      TAG.Challenge.submitButtonSelector = '#tag-challenge--submit';
+      TAG.Challenge.registerURL = '/student/ajax/register';
+
+      // Functions
+      TAG.Challenge.submitForm = function () {
+        $(context).on('click', TAG.Challenge.submitButtonSelector, function (e) {
+          e.preventDefault();
+          console.log('clicked submit');
+          $.ajax({
+            url: TAG.Challenge.registerURL,
+            context: document.body
+          }).done(function(data) {
+            // $( this ).addClass( "done" );
+            console.log('success');
+            console.log(data);
+          });
+        });
+      }
+
+      TAG.Challenge.submitForm();
       // $(context).find('.book-outline-form').drupalSetSummary(function (context) {
       //   var $select = $(context).find('.book-title-select');
       //   var val = $select.val();

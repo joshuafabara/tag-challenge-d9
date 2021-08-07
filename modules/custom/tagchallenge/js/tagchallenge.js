@@ -39,6 +39,13 @@
               function(response) {
                 if (response.status === 'registered') {
                   let newTopic = {};
+
+                  // Deleting already picked topics
+                  delete TAG.Challenge.topics[response.topic.value];
+                  TAG.Challenge.subjects[response.subject.value].topics = $.grep(TAG.Challenge.subjects[response.subject.value].topics, function(e){ 
+                    return e.value != response.topic.value; 
+                  });
+
                   TAG.Challenge.clearForm();
                   newTopic.weight = response.timeslot.value;
                   newTopic.username = response.username;
